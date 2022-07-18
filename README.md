@@ -1,1 +1,1 @@
-# philips-18th-july-training
+# philips-july-dp-training
