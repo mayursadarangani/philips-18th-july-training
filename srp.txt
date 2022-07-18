@@ -15,7 +15,10 @@ class Checker
   }
   
  1. The code is voilating the SRP.
- 2. The features of battery health check up can be distributed to different methods.
- 3. Each method returning the boolean - characteristic of that particular feature
- 4. The main method can return the final status - combination of the output from different methods.
+ 2. GOD anti-pattern is in place.
+ 
+ Suggestions/Improvisations:
+ 1. The features of battery health check up can be distributed to different methods.
+    Each method returning the boolean - characteristic of that particular feature
+    The main method can return the final status - combination of the output from different methods.
   
