@@ -1,0 +1,21 @@
+class Checker
+{
+    static bool batteryIsOk(float temperature, float soc, float chargeRate) {
+        if(temperature < 0 || temperature > 45) {
+            Console.WriteLine("Temperature is out of range!");
+            return false;
+        } else if(soc < 20 || soc > 80) {
+            Console.WriteLine("State of Charge is out of range!");
+            return false;
+        } else if(chargeRate > 0.8) {
+            Console.WriteLine("Charge Rate is out of range!");
+            return false;
+        }
+        return true;
+  }
+  
+ 1. The code is voilating the SRP.
+ 2. The features of battery health check up can be distributed to different methods.
+ 3. Each method returning the boolean - characteristic of that particular feature
+ 4. The main method can return the final status - combination of the output from different methods.
+  
