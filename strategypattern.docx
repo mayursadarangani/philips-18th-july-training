@@ -1,0 +1,94 @@
+Interface:
+
+/// <summary>
+    /// Interface for logging
+    /// </summary>
+    public interface ILog
+    {
+        /// <summary>
+        /// Logs information message 
+        /// </summary>
+        /// <param name="message"></param>
+        void Info(string message);
+
+        /// <summary>
+        /// Logs error message 
+        /// </summary>
+        /// <param name="message"></param>
+        void Error(string message);
+    }
+    
+Model class 1:
+
+    /// <summary>
+    /// class for logging in dev log
+    /// </summary>
+    internal class DevLogger : ILog
+    {
+        #region Private Members
+        private readonly SystemMessage _sysLog;
+        #endregion
+
+        #region Constructor
+        internal DevLogger(string originator, string aspect)
+        {
+            _sysLog = new SystemMessage(originator, aspect);
+        }
+        #endregion
+
+        #region Public Methods
+        /// <summary>
+        /// Logs info in dev log file
+        /// </summary>
+        /// <param name="message"></param>
+        public void Info(string message)
+        {
+            _sysLog.Info(message);
+        }
+
+        /// <summary>
+        /// Logs error in dev log file
+        /// </summary>
+        /// <param name="message"></param>
+        public void Error(string message)
+        {
+            _sysLog.Error(message);
+        }
+        #endregion
+    }
+    
+    
+Model class 2:
+
+/// <summary>
+    /// class for logging in file
+    /// </summary>
+    internal class PerfLogger : ILog
+    {
+        #region Private Members
+        private static PerfLogger _instance;
+#endregion
+        
+
+        #region Public Methods
+        /// <summary>
+        /// Logs info in log file
+        /// </summary>
+        /// <param name="message"></param>
+        public void Info(string message)
+        {
+            WriteToFile(message, "Info");
+        }
+
+        /// <summary>
+        /// Logs error in log file
+        /// </summary>
+        /// <param name="message"></param>
+        public void Error(string message)
+        {
+            WriteToFile(message, "Error");
+        }
+        
+        
+        
+  
