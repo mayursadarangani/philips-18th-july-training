@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +13,12 @@ namespace VisitorPatternExample
         public void Plot(List<IPlotter> plotters)
         {
             //M*N cartesian product
-            foreach (Shape s in _structure)
+            
+            foreach(IPlotter p in plotters)
             {
-                foreach (IPlotter p in plotters)
+                foreach(Shape s in _structure)
                 {
-                    p.PlotCircle(s as Circle);
+                    s.Draw(p);
                 }
             }
         }
@@ -25,13 +26,14 @@ namespace VisitorPatternExample
 
     public abstract class Shape
     {
-        public abstract string Structure();
+        public abstract string Draw(IPlotter shapePlotter);
     }
 
     public class Rectangle : Shape
     {
-        public override string Structure()
+        public override string Draw(IPlotter shapePlotter)
         {
+            shapePlotter.Plot(this);
             return GetHeightAndWidth();
         }
 
@@ -40,8 +42,9 @@ namespace VisitorPatternExample
 
     public class Polygon : Shape
     {
-        public override string Structure()
+        public override string Draw(IPlotter shapePlotter)
         {
+            shapePlotter.Plot(this);
             return GetSides();
         }
 
@@ -50,8 +53,9 @@ namespace VisitorPatternExample
 
     public class Circle : Shape
     {
-        public override string Structure()
+        public override string Draw(IPlotter shapePlotter)
         {
+            shapePlotter.Plot(this);
             return GetRadius();
         }
 
@@ -60,24 +64,24 @@ namespace VisitorPatternExample
 
     public interface IPlotter
     {
-        void PlotRectangle(Rectangle rectangle);
-        void PlotCircle(Circle circle);
-        void PlotPolygon(Polygon rectangle);
+        void Plot(Rectangle rectangle);
+        void Plot(Circle circle);
+        void Plot(Polygon rectangle);   
     }
 
     public class LaserPrinter : IPlotter
     {
-        public void PlotCircle(Circle circle)
+        public void Plot(Circle circle)
         {
             throw new NotImplementedException();
         }
 
-        public void PlotPolygon(Polygon rectangle)
+        public void Plot(Polygon rectangle)
         {
             throw new NotImplementedException();
         }
 
-        public void PlotRectangle(Rectangle rectangle)
+        public void Plot(Rectangle rectangle)
         {
             throw new NotImplementedException();
         }
@@ -85,17 +89,17 @@ namespace VisitorPatternExample
 
     public class InkJetPrinter : IPlotter
     {
-        public void PlotCircle(Circle circle)
+        public void Plot(Circle circle)
         {
             throw new NotImplementedException();
         }
 
-        public void PlotPolygon(Polygon rectangle)
+        public void Plot(Polygon rectangle)
         {
             throw new NotImplementedException();
         }
 
-        public void PlotRectangle(Rectangle rectangle)
+        public void Plot(Rectangle rectangle)
         {
             throw new NotImplementedException();
         }
